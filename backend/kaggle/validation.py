@@ -9,6 +9,9 @@ def validate():
             This function check for the existence of
             package kaggle and api token file.
 
+            Api token file is expected to have this path ~/.kaggle/kaggle.json
+            Package kaggle is expected to install with pip
+
             This also prints what is missing to stdout.
         Returns:
             True : if package kaggle and api token file exits
