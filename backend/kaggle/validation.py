@@ -5,17 +5,17 @@ from pathlib import Path
 
 def validate():
     '''
-        Abilities:
-            This function check for the existence of
-            package kaggle and api token file.
+    Abilities:
+        This function check for the existence of
+        package kaggle and api token file.
 
-            Api token file is expected to have this path ~/.kaggle/kaggle.json
-            Package kaggle is expected to install with pip
+        Api token file is expected to have this path ~/.kaggle/kaggle.json
+        Package kaggle is expected to install with pip
 
-            This also prints what is missing to stdout.
-        Returns:
-            True : if package kaggle and api token file exits
-            False : else
+        This also prints what is missing to stdout.
+    Returns:
+        True : if package kaggle and api token file exits
+        False : else
     '''
     found = True
     try:
