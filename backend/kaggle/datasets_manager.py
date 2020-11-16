@@ -7,15 +7,12 @@ DEFAULT_DOWNLOAD_PATH = path.join(Path.home(), Path('.kaggle/'))
 
 
 def download(dataset, download_path=DEFAULT_DOWNLOAD_PATH):
-    '''
+    """Download a dataset from kaggle then save it to a directory.
     Parameters:
         dataset : a string.
         download_path : a string or any Path object.
 
-    Abilities:
-        To download a dataset from kaggle then save it to a directory.
-
-    Returns:
+    Return:
         dataset_path : full folder path where dataset is downloaded.
         None : if dataset is already existed in download path.
 
@@ -28,7 +25,7 @@ def download(dataset, download_path=DEFAULT_DOWNLOAD_PATH):
         dataset_path = download(dataset, download_path)
 
         dataset_path = '~/.kaggle/aungpyaeap/tictactoe-endgame-dataset-uci/'
-    '''
+    """
     try:
         os.mkdir(path.join(download_path, Path(dataset.split('/')[0])))
         dataset_path = path.join(download_path, Path(dataset))
@@ -42,29 +39,28 @@ def download(dataset, download_path=DEFAULT_DOWNLOAD_PATH):
 
 
 class skin_cancer_mnist:
+    """Make an object manipulating dataset skin-cancer-minist-ham10000
+    from kmader
+
+    A skin_cancer_mnist object has
+        attributes:
+            __dataset_url : a string
+            __dataset_path : a Path object
+            __metadata_path : a Path object
+            __img_metadata_list : a list of tuples.
+                Each tuple has two elements.
+                First element (Path object) is a path to an image
+                Second element (Dict object) is a metadata of an image
+        functions:
+            get_img_metadata_list()
+            get_dataset_url()
+    """
     def __init__(self, dataset_path, full_path=False):
-        '''
+        """
         Parameters:
             dataset_path : a string or any Path object.
             full_path : if True then is non-relative path.
-
-        Abilities:
-            To make an object manipulating dataset skin-cancer-minist-ham10000
-            from kmader.
-
-        Returns:
-            A skin_cancer_mnist object has
-                attributes:
-                    __dataset_url : a string
-                    __dataset_path : a Path object
-                    __metadata_path : a Path object
-                    __img_metadata_list : a list of tuples.
-                        Each tuple has two elements.
-                        First element (Path object) is a path to an image
-                        Second element (Dict object) is a metadata of an image
-                functions
-                    get_img_metadata_list()
-        '''
+        """
         self.__dataset_url = 'https://www.kaggle.com/' \
                              'kmader/skin-cancer-mnist-ham10000'
 
