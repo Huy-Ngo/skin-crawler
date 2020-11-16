@@ -63,7 +63,8 @@ def check_melanoma(metadata):
 
 def ISIC_getdata(numjson=200, numimage=20,
                  dermo_filter=True,
-                 melano_filter=True):
+                 melano_filter=True,
+                 export=True):
     """Download images from internet confirmed melanocytic in its metadata and
     are classified as being acquired through dermoscopy
     and creating a CSV from metadata of such images"""
@@ -78,12 +79,18 @@ def ISIC_getdata(numjson=200, numimage=20,
     Default is true
     melano_filter(bool): Checking if you only want images confirmed melanocytic
     Default is True
+    export(bool): Option to choose if you want to export the metadata as a CSV
+    file.Default is True
     """
+
+    """Return:
+    List of the metadata of the images downloaded"""
     if (numjson < numimage or not
             isinstance(numjson, int) or not
             isinstance(numimage, int) or not
             isinstance(dermo_filter, bool) or not
-            isinstance(melano_filter, bool)):
+            isinstance(melano_filter, bool) or not
+            isinstance(export, bool)):
         print("Invalid parameters")
     else:
         dataset = ISIC_request(numjson)
@@ -126,11 +133,12 @@ def ISIC_getdata(numjson=200, numimage=20,
                 i = i+1
                 if(i == numimage):
                     break
-        df = pd.DataFrame.from_dict(output2)
+        if export:
+            df = pd.DataFrame.from_dict(output2)
 
-        df.to_csv(r''+str(pathlib.Path(__file__).parent.absolute()) +
-                  '/Metadata.csv', index=False, header=True)
-
+            df.to_csv(r''+str(pathlib.Path(__file__).parent.absolute()) +
+                      '/Metadata.csv', index=False, header=True)
+    return output2
 
 if __name__ == "__main__":
     """ Main function"""
