@@ -12,9 +12,9 @@ kaggle.validate()
 
 `validate()` checks for the existence of package kaggle and api token file.
 
-Api token file is expected to have this path ~/.kaggle/kaggle.json
+Api token file is expected to have this path `~/.kaggle/kaggle.json`
 
-Package kaggle is expected to install with pip
+Package kaggle is expected to install with `pip install kaggle`
 
 This also prints what is missing to stdout.
 
@@ -62,3 +62,13 @@ A skin_cancer_mnist object has
 Parameters:
   - `dataset_path` : a string or any Path object.
   - `full_path` : if True then is non-relative path.
+
+`get_dataset_url()`
+
+Returns:
+  - `self.__dataset_url`
+
+`get_img_metadata_list()`
+
+Returns
+  - `self.__img_metadata_list`
