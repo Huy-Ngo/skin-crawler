@@ -1,6 +1,4 @@
 import requests
-import json
-from PIL import Image
 import pandas as pd
 import pathlib
 import os
@@ -137,4 +135,3 @@ def ISIC_getdata(numjson=200, numimage=20,
 if __name__ == "__main__":
     """ Main function"""
     ISIC_getdata()
-
