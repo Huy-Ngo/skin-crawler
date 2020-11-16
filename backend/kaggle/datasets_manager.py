@@ -98,6 +98,8 @@ class skin_cancer_mnist:
     def get_img_metadata_list(self):
         return self.__img_metadata_list
 
+    def get_dataset_url(self):
+        return self.__dataset_url
 
 if __name__ == '__main__':
     dataset_path = 'data/kmader/skin-cancer-mnist-ham10000/'
