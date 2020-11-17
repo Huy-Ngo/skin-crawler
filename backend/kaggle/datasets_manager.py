@@ -38,7 +38,7 @@ def download(dataset, download_path=DEFAULT_DOWNLOAD_PATH):
     return dataset_path
 
 
-class skin_cancer_mnist:
+class SkinCancerMnist:
     """Make an object manipulating dataset skin-cancer-minist-ham10000
     from kmader
 
