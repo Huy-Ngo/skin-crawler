@@ -50,10 +50,10 @@ def check_melanoma(metadata):
     """Checking if a image is confirmed melanocytic by ISIC's API.
 
     Parameter:
-    metadata: The metadata of the image getting through the API
+        metadata: The metadata of the image getting through the API
 
     Return:
-    True if the image is confirmed melanocytic, False if it isn't
+        True if the image is confirmed melanocytic, False if it isn't
     """
     if "melanocytic" not in metadata["meta"]["clinical"]:
         return False
