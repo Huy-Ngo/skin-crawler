@@ -132,7 +132,7 @@ def ISIC_getdata(numjson=200, numimage=20,
                 img = Image.open(BytesIO(r.content))
                 img.save(path+"/Image/"+str(output['Name'])+'.jpg')
                 output2.append(output)
-                i = i+1
+                i += 1
                 if(i == numimage):
                     break
         if export:
