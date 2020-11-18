@@ -43,7 +43,7 @@ Returns:
 ### Download a dataset
 
 ```Python
-dataset = 'aungpyaeap/tictactoe-endgame-dataset-uci'
+dataset = 'kmader/skin-cancer-mnist-ham10000'
 dataset_path = kaggle.download(dataset)
 ```
 
