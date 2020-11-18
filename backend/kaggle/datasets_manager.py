@@ -14,25 +14,24 @@ def download(dataset, download_path=DEFAULT_DOWNLOAD_PATH):
 
     Return:
         dataset_path : full folder path where dataset is downloaded.
-        None : if dataset is already existed in download path.
 
     Example:
         This is a link to a kaggle dataset:
-        https://www.kaggle.com/aungpyaeap/tictactoe-endgame-dataset-uci
+        https://www.kaggle.com/dinhanhx/skin-cancer-mnist-ham10000
 
-        dataset = 'aungpyaeap/tictactoe-endgame-dataset-uci'
+        dataset = 'dinhanhx/skin-cancer-mnist-ham10000'
         download_path = '~/.kaggle/'
         dataset_path = download(dataset, download_path)
 
-        dataset_path = '~/.kaggle/aungpyaeap/tictactoe-endgame-dataset-uci/'
+        dataset_path = '~/.kaggle/dinhanhx/skin-cancer-mnist-ham10000/'
     """
+    dataset_path = path.join(download_path, Path(dataset))
     try:
         os.mkdir(path.join(download_path, Path(dataset.split('/')[0])))
-        dataset_path = path.join(download_path, Path(dataset))
         os.mkdir(dataset_path)
-
     except FileExistsError:
-        return None
+        print(f'{dataset_path} already exists.')
+        return dataset_path
 
     os.system(f'kaggle datasets download {dataset} -p {dataset_path} --unzip')
     return dataset_path
@@ -62,7 +61,7 @@ class SkinCancerMnist:
             full_path : if True then is non-relative path.
         """
         self.__dataset_url = 'https://www.kaggle.com/' \
-                             'kmader/skin-cancer-mnist-ham10000'
+                             'dinhanhx/skin-cancer-mnist-ham10000'
 
         self.__dataset_path = Path(dataset_path)
         if full_path:
@@ -99,6 +98,6 @@ class SkinCancerMnist:
 
 
 if __name__ == '__main__':
-    dataset_path = 'data/kmader/skin-cancer-mnist-ham10000/'
+    dataset_path = download('dinhanhx/skin-cancer-mnist-ham10000')
     scm = SkinCancerMnist(dataset_path)
     print(*scm.get_img_metadata_list(), sep='\n')
