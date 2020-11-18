@@ -1,7 +1,7 @@
 To use the module from terminal,run:
 
 ```shell script
-$python isic-crawler.py --numjson $val1 --numimage $val2 --dermo $bool1 --melanoma $bool2
+$python isic-crawler.py --numjson $val1 --numimage $val2 --dermo $bool1 --melano $bool2
 ```
 
 This module download images from API and keep it in "/Image" folder of the directory.
