@@ -66,24 +66,21 @@ def ISIC_getdata(numjson=200, numimage=20,
                  dermo_filter=True,
                  melano_filter=True,
                  export=True):
-    """Download images from internet confirmed melanocytic in its metadata and
-    are classified as being acquired through dermoscopy and creating a CSV from
-    metadata of such images.
+    """Download images of dermoscopic images and return their metadata.
 
     Parameters:
-    numjson(int): Number of metadata sets of images from ISIC_request().
-    Default is 100
-    numimage(int): Number of images you want fulfilling both requirements
-    (dermoscopic image and being melanocytic) from the metadata sets.
-    Should be more than numjson. Default is 20
-    dermo_filter(bool): Checking if you only want images acquired by dermoscopy
-    Default is true
-    melano_filter(bool): Checking if you only want images confirmed melanocytic
-    Default is True
-    export(bool): Option to choose if you want to export the metadata as a CSV
-    file. Default is True
+        numjson(int): Number of datasets of images from ISIC_request().
+            Default is 100
+        numimage(int): Number of images you want from the dataset.
+            Should be more than numjson. Default is 20
+        dermo_filter(bool): Checking if you only want images acquired by dermoscopy
+            Default is `True`.
+        melano_filter(bool): Checking if you only want images confirmed melanocytic
+            Default is True
+        export(bool): Option to choose if you want to export the metadata as a CSV
+            file. Default is True
 
-    Return:List of the metadata of the images downloaded
+    Return: List of the metadata of the images downloaded
     """
     if (numjson < numimage or not
             isinstance(numjson, int) or not
