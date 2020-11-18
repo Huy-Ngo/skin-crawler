@@ -72,14 +72,14 @@ def ISIC_getdata(numjson=20, numimage=20,
         print("Invalid parameters")
     else:
         dataset = ISIC_request(numjson)
-        output = {}
-        output2 = []
+        image_data = {}
+        datalist = []
         i = 0
         for set in dataset:
             if(dermo_filter is False or check_dermoscopic(set) and
                     melano_filter is False or check_melanoma(set)):
-                output['Name'] = str(set['name'])
-                output['Caption'] = str(set['_id'])
+                image_data['Name'] = str(set['name'])
+                image_data['Caption'] = str(set['_id'])
                 headers = {
                     'Accept': 'application/json'
                 }
@@ -89,12 +89,12 @@ def ISIC_getdata(numjson=20, numimage=20,
                     os.makedirs("Image")
                 path = str(pathlib.Path(__file__).parent.absolute())
                 img = Image.open(BytesIO(r.content))
-                img.save(path+"/Image/"+str(output['Name'])+'.jpg')
-                output2.append(output)
+                img.save(path+"/Image/"+str(image_data['Name'])+'.jpg')
+                datalist.append(image_data)
                 i += 1
                 if(i == numimage):
                     break
-    return output2
+    return datalist
 
 
 if __name__ == "__main__":
