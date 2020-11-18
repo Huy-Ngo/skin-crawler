@@ -14,12 +14,10 @@ def ISIC_request(response, num=100):
     request to the ISIC's REST API.
 
     Parameters:
-
-    num(int): Number of the images you get from the archive,default is 100
+        num(int): Number of the images you get from the archive,default is 100
 
     Returns:
-
-    Json: Response metadata in JSON format
+        Json: Response metadata in JSON format
     """
     start_url = f'https://isic-archive.com/api/v1/image?limit={num} \
                   &sort=name&sortdir=-1&detail=true'
