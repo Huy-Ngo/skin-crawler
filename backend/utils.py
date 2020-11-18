@@ -1,4 +1,4 @@
-from kaggle import download, validate
+from kaggle import download, validate, SkinCancerMnist
 
 
 if __name__ == '__main__':
@@ -7,6 +7,6 @@ if __name__ == '__main__':
         dataset_path = download(dataset)
         scm = SkinCancerMnist(dataset_path)
         for img_metadata in scm.get_img_metadata_list():
-            print('Image path: ', img_metadata[0])  # type(img_metadata[0]) returns str
-            print('Image info: ', img_metadata[1])  # type(img_metadata[1]) returns dict
+            print('Image path: ', img_metadata[0])
+            print('Image info: ', img_metadata[1])
             print('===')
