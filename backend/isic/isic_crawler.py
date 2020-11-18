@@ -3,6 +3,7 @@ import pathlib
 import os
 from io import BytesIO
 from PIL import Image
+import argparse
 
 """A module to fetch data from International Skin Imaging Collaboration API"""
 """For further information about the API: https://isic-archive.com/api/v1/ """
@@ -59,13 +60,10 @@ def ISIC_getdata(numjson=20, numimage=20,
     """Download images of dermoscopic images and return their metadata.
     Parameters:
         numjson(int): Number of datasets of images from ISIC_request().
-            Default is 100
         numimage(int): Number of images you want from the dataset.
-            Should be more than numjson. Default is 20
+            Should be more than numjson.
         dermo_filter(bool): Get only want images acquired by dermoscopy
-            Default is `True`.
         melano_filter(bool): Get you only want images confirmed melanocytic
-            Default is True
     Return: List of the metadata of the images downloaded
     """
     if (numjson < numimage):
@@ -94,8 +92,14 @@ def ISIC_getdata(numjson=20, numimage=20,
                 i += 1
                 if(i == numimage):
                     break
-    return datalist
+        return datalist
 
 
 if __name__ == "__main__":
-    ISIC_getdata()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--numjson', default=20)
+    parser.add_argument('--numimage', default=20)
+    parser.add_argument('--dermo', default=False)
+    parser.add_argument('--melano', default=False)
+    args = parser.parse_args()
+    ISIC_getdata(args.numjson, args.numimage, args.dermo, args.melano)
