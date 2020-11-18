@@ -42,7 +42,7 @@ class SkinCancerMnist:
     """Make an object manipulating dataset skin-cancer-minist-ham10000
     from kmader
 
-    A skin_cancer_mnist object has
+    A SkinCancerMnist object has
         attributes:
             __dataset_url : a string
             __dataset_path : a Path object
@@ -100,5 +100,5 @@ class SkinCancerMnist:
 
 if __name__ == '__main__':
     dataset_path = 'data/kmader/skin-cancer-mnist-ham10000/'
-    scm = skin_cancer_mnist(dataset_path)
+    scm = SkinCancerMnist(dataset_path)
     print(*scm.get_img_metadata_list(), sep='\n')
