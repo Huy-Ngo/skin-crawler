@@ -10,8 +10,8 @@ from PIL import Image
 
 
 def ISIC_request(response, num=100):
-    """Fetching the metadata from images in ISIC archive
-    by sending a HTTP request to the ISIC's REST API
+    """Fetching the metadata from images in ISIC archive by sending a HTTP
+    request to the ISIC's REST API.
 
     Parameters:
 
@@ -19,7 +19,8 @@ def ISIC_request(response, num=100):
 
     Returns:
 
-    Json: Response metadata in JSON format"""
+    Json: Response metadata in JSON format
+    """
     start_url = f'https://isic-archive.com/api/v1/image?limit={num} \
                   &sort=name&sortdir=-1&detail=true'
     headers = {
@@ -31,7 +32,7 @@ def ISIC_request(response, num=100):
 
 
 def check_dermoscopic(meta):
-    """Checking if a image is acquired through dermoscopy by ISIC's API
+    """Checking if a image is acquired through dermoscopy by ISIC's API.
 
     Parameter:
     meta: The metadata of the image getting through the API
@@ -48,7 +49,7 @@ def check_dermoscopic(meta):
 
 
 def check_melanoma(metadata):
-    """Checking if a image is confirmed melanocytic by ISIC's API
+    """Checking if a image is confirmed melanocytic by ISIC's API.
 
     Parameter:
     metadata: The metadata of the image getting through the API
@@ -68,8 +69,8 @@ def ISIC_getdata(numjson=200, numimage=20,
                  melano_filter=True,
                  export=True):
     """Download images from internet confirmed melanocytic in its metadata and
-    are classified as being acquired through dermoscopy
-    and creating a CSV from metadata of such images
+    are classified as being acquired through dermoscopy and creating a CSV from
+    metadata of such images.
 
     Parameters:
     numjson(int): Number of metadata sets of images from ISIC_request().
@@ -84,7 +85,8 @@ def ISIC_getdata(numjson=200, numimage=20,
     export(bool): Option to choose if you want to export the metadata as a CSV
     file. Default is True
 
-    Return:List of the metadata of the images downloaded"""
+    Return:List of the metadata of the images downloaded
+    """
     if (numjson < numimage or not
             isinstance(numjson, int) or not
             isinstance(numimage, int) or not
@@ -102,14 +104,28 @@ def ISIC_getdata(numjson=200, numimage=20,
                     melano_filter is False or check_melanoma(set)):
                 output['Id'] = str(set['_id'])
                 output['Name'] = str(set['name'])
-                output['Age'] = str(set['meta']['clinical']['age_approx'])
-                output['General Anatomy Site'] = str(
-                    set['meta']['clinical']['anatom_site_general'])
+                if 'age_approx' in set['meta']['clinical']:
+                    output['Age'] = str(set['meta']['clinical']['age_approx'])
+                else:
+                    output['Age'] = "Not known"
+                if 'anatom_site_general' in set['meta']['clinical']:
+                    output['General Anatomy Site'] = str(
+                        set['meta']['clinical']['anatom_site_general'])
+                else:
+                    output['General Anatomy Site'] = "Not known"
                 output['Description'] = str(set['dataset']['description'])
-                output['Diagnosis'] = str(set['meta']['clinical']['diagnosis'])
-                output['Sex'] = str(set['meta']['clinical']['sex'])
-                output['Confirmed Diagnosis'] = str(
-                    set['meta']['clinical']['diagnosis_confirm_type'])
+                if 'diagnosis' in set['meta']['clinical']:
+                    output['Diagnosis'] = str(
+                        set['meta']['clinical']['diagnosis'])
+                else:
+                    output['Diagnosis'] = "Not known"
+                if 'sex' in set['meta']['clinical']:
+                    output['Sex'] = str(set['meta']['clinical']['sex'])
+                else:
+                    output['Sex'] = "Not known"
+                if melano_filter:
+                    output['Confirmed Diagnosis'] = str(
+                        set['meta']['clinical']['diagnosis_confirm_type'])
                 headers = {
                     'Accept': 'application/json'
                 }
@@ -118,9 +134,8 @@ def ISIC_getdata(numjson=200, numimage=20,
                 if not os.path.exists("Image"):
                     os.makedirs("Image")
                 path = str(pathlib.Path(__file__).parent.absolute())
-                with open(path+"/Image/"+str(output['Name']), 'wb') as f:
-                    img = Image.open(BytesIO(r.content))
-                    img.save(str(output['Name'])+'.jpg')
+                img = Image.open(BytesIO(r.content))
+                img.save(path+"/Image/"+str(output['Name'])+'.jpg')
                 output2.append(output)
                 i = i+1
                 if(i == numimage):
