@@ -21,9 +21,7 @@ def ISIC_request(response, num=100):
     """
     start_url = f'https://isic-archive.com/api/v1/image?limit={num} \
                   &sort=name&sortdir=-1&detail=true'
-    headers = {
-        'Accept': 'application/json'
-    }
+    headers = { 'Accept': 'application/json' }
     r = requests.get(start_url, headers=headers)
     data = r.json()
     return data
