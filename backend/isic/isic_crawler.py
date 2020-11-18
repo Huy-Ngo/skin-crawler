@@ -1,5 +1,4 @@
 import requests
-import pandas as pd
 import pathlib
 import os
 from io import BytesIO
