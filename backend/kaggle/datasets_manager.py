@@ -93,6 +93,30 @@ class SkinCancerMnist:
     def get_img_metadata_list(self):
         return self.__img_metadata_list
 
+    def export_img_to_flask(self, index=0, caption_style='HAM'):
+        """Get an image and it's info from self.__img_metadata_list
+        Parameters:
+            index : an int.
+            caption_style : a str.
+        Returns:
+            a dictionary has
+                - 'Image path'
+                - 'Host'
+                - 'Original url'
+                - 'Caption'
+        """
+        img_metadata = self.__img_metadata_list[index]
+        if caption_style == 'HAM':
+            return {'Image path': img_metadata[0],
+                    'Host': 'Kaggle',
+                    'Original url': self.__dataset_url,
+                    'Caption': img_metadata[1]['lesion_id']}
+        else:
+            return {'Image path': img_metadata[0],
+                    'Host': 'Kaggle',
+                    'Original url': self.__dataset_url,
+                    'Caption': img_metadata[1]['image_id']}
+
     def get_dataset_url(self):
         return self.__dataset_url
 

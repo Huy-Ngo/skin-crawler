@@ -6,11 +6,11 @@ import kaggle
 
 ## User documentation
 
-## Get data from [skin cancer mnist](https://www.kaggle.com/kmader/skin-cancer-mnist-ham10000)
+## Get data from [skin cancer mnist](https://www.kaggle.com/dinhanhx/skin-cancer-mnist-ham10000)
 
 ```Python
 if kaggle.validate():
-  dataset = 'kmader/skin-cancer-mnist-ham10000'
+  dataset = 'dinhanhx/skin-cancer-mnist-ham10000'
   dataset_path = kaggle.download(dataset)
   scm = kaggle.SkinCancerMnist(dataset_path)
   for img_metadata in scm.get_img_metadata_list():
@@ -19,7 +19,7 @@ if kaggle.validate():
     print('===')
 ```
 
-Firstly, it checks for kaggle api and kaggle package. Then it downloads the dataset then save it this directory `~/.kaggle/kmader/skin-cancer-mnist-ham10000`. For Windows, it's `YourUserName/.kaggle/kmader/skin-cancer-mnist-ham10000`. Secondly, it creates an object to manipulate the dataset. Finally it prints to stdout what that object has.
+Firstly, it checks for kaggle api and kaggle package. Then it downloads the dataset then save it this directory `~/.kaggle/dinhanhx/skin-cancer-mnist-ham10000`. For Windows, it's `YourUserName/.kaggle/dinhanhx/skin-cancer-mnist-ham10000`. Secondly, it creates an object to manipulate the dataset. Finally it prints to stdout what that object has.
 
 ## Module documentation
 
@@ -43,7 +43,7 @@ Returns:
 ### Download a dataset
 
 ```Python
-dataset = 'kmader/skin-cancer-mnist-ham10000'
+dataset = 'dinhanhx/skin-cancer-mnist-ham10000'
 dataset_path = kaggle.download(dataset)
 ```
 
@@ -55,7 +55,6 @@ Parameters:
 
 Returns:
   - `dataset_path` : full folder path where dataset is downloaded.
-  - `None` : if dataset is already existed in download path.
 
 ### Class SkinCancerMnist
 
@@ -64,7 +63,7 @@ scm = SkinCancerMnist(dataset_path)
 print(*scm.get_img_metadata_list(), sep='\n')
 ```
 
-`class SkinCancerMnist` makes an object manipulating dataset skin-cancer-minist-ham10000 from kmader
+`class SkinCancerMnist` makes an object manipulating dataset skin-cancer-minist-ham10000 from dinhanhx
 
 A SkinCancerMnist object has
   - attributes:
@@ -75,6 +74,7 @@ A SkinCancerMnist object has
   - functions:
     - `get_img_metadata_list()`
     - `get_dataset_url()`
+    - `export_img_to_flask()`
 
 `__init__()`
 
@@ -91,3 +91,17 @@ Returns:
 
 Returns
   - `self.__img_metadata_list`
+
+`export_img_to_flask()`
+Get an image and it's info from `self.__img_metadata_list`
+
+Parameters:
+  - `index` : an int.
+  - `caption_style` : a str.
+
+Returns:
+  - a dictionary has
+    - 'Image path' : full path to image
+    - 'Host' : name of host
+    - 'Original url' : orignal url
+    - 'Caption' : image id
