@@ -12,7 +12,7 @@ import kaggle
 if kaggle.validate():
   dataset = 'kmader/skin-cancer-mnist-ham10000'
   dataset_path = kaggle.download(dataset)
-  scm = kaggle.skin_cancer_mnist(dataset_path)
+  scm = kaggle.SkinCancerMnist(dataset_path)
   for img_metadata in scm.get_img_metadata_list():
     print('Image path: ', img_metadata[0])  # type(img_metadata[0]) returns str
     print('Image info: ', img_metadata[1])  # type(img_metadata[1]) returns dict
@@ -57,16 +57,16 @@ Returns:
   - `dataset_path` : full folder path where dataset is downloaded.
   - `None` : if dataset is already existed in download path.
 
-### Class skin_cancer_mnist
+### Class SkinCancerMnist
 
 ```Python
-scm = skin_cancer_mnist(dataset_path)
+scm = SkinCancerMnist(dataset_path)
 print(*scm.get_img_metadata_list(), sep='\n')
 ```
 
-`class skin_cancer_mnist` makes an object manipulating dataset skin-cancer-minist-ham10000 from kmader
+`class SkinCancerMnist` makes an object manipulating dataset skin-cancer-minist-ham10000 from kmader
 
-A skin_cancer_mnist object has
+A SkinCancerMnist object has
   - attributes:
     - `__dataset_url` : a string
     - `__dataset_path` : a Path object
