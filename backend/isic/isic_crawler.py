@@ -6,7 +6,6 @@ from PIL import Image
 import argparse
 
 """A module to fetch data from International Skin Imaging Collaboration API"""
-"""For further information about the API: https://isic-archive.com/api/v1/ """
 
 
 def ISIC_request(response, num=100):
