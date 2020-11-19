@@ -1,1 +1,1 @@
-from .crawlinginmyskin import ISIC_getdata
+from .isic_crawler import ISIC_getdata
