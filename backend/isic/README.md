@@ -13,7 +13,7 @@ ISIC_getdata(numjson = 20,numimage = 20,dermo_filter = False,melano_filter = Fal
 
 ## Output
 
-It will download $val2 images out of $val1 json responses.Be sure that $val1 is larger than or equal to $val2 at all times
+It will download $val2 (numimage in function) images out of $val1 (numjson in function) json responses.Be sure that $val1 is larger than or equal to $val2 at all times
 
 This module download images from API and keep it in "/Image" folder of the directory.
 
