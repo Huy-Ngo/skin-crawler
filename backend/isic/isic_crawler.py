@@ -4,7 +4,6 @@ import os
 from io import BytesIO
 from PIL import Image
 import argparse
-ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 """A module to fetch data from International Skin Imaging Collaboration API"""
 """For further information about the API: https://isic-archive.com/api/v1/ """
@@ -19,7 +18,7 @@ def ISIC_request(response, num=100):
         Json: Response metadata in JSON format
     """
     start_url = f'https://isic-archive.com/api/v1/image?limit={num} \
-                  &sort=name&sortdir=-1&detail=true'
+                  &sort=name&sortdir=1&detail=true'
     headers = {'Accept': 'application/json'}
     r = requests.get(start_url, headers=headers)
     data = r.json()
@@ -87,9 +86,13 @@ def ISIC_getdata(numjson=20, numimage=20,
                 if not os.path.exists("Image"):
                     os.makedirs("Image")
                 path = str(pathlib.Path(__file__).parent.absolute())
-                img = Image.open(BytesIO(r.content))
-                img.save(path+"/Image/"+str(image_data['Name'])+'.jpg')
-                datalist.append(image_data)
+                try:
+                    img = Image.open(BytesIO(r.content))
+                    img.save(path+"/Image/"+str(image_data['Name'])+'.jpg')
+                    datalist.append(image_data)
+                except OSError:
+                    print("Download Failed:Truncated Image")
+                    continue
                 i += 1
                 if(i == numimage):
                     break
