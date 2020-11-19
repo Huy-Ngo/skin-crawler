@@ -3,6 +3,13 @@ To use the module from terminal,run:
 ```shell script
 $python isic-crawler.py --numjson $val1 --numimage $val2 --dermo $bool1 --melano $bool2
 ```
+To call it as a function,go:
+
+```shell script
+isic-crawler(numjson = 20,numimage = 20,dermo_filter = False,melano_filter = False)
+```
+
+
 
 This module download images from API and keep it in "/Image" folder of the directory.
 
