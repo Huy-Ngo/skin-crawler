@@ -55,7 +55,7 @@ def check_melanoma(metadata):
     return True
 
 
-def ISIC_getdata(numjson=5, numimage=5,
+def ISIC_getdata(numjson=20, numimage=20,
                  dermo_filter=False,
                  melano_filter=False):
     """Download images of dermoscopic images and return their metadata.
