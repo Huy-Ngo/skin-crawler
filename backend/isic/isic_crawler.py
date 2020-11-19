@@ -3,7 +3,6 @@ import pathlib
 import os
 from io import BytesIO
 from PIL import Image, ImageFile
-import argparse
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
@@ -56,7 +55,7 @@ def check_melanoma(metadata):
     return True
 
 
-def ISIC_getdata(numjson=20, numimage=20,
+def ISIC_getdata(numjson=5, numimage=5,
                  dermo_filter=False,
                  melano_filter=False):
     """Download images of dermoscopic images and return their metadata.
@@ -85,27 +84,13 @@ def ISIC_getdata(numjson=20, numimage=20,
                 }
                 r = requests.get("https://isic-archive.com/api/v1/image/" +
                                  str(set['_id'])+"/download", headers=headers)
-                if not os.path.exists("Image"):
-                    os.makedirs("Image")
                 path = str(pathlib.Path(__file__).parent.absolute())
-                try:
-                    img = Image.open(BytesIO(r.content))
-                    img.save(path+"/Image/"+str(image_data['Name'])+'.jpg')
-                    datalist.append(image_data)
-                except OSError:
-                    print("Download Failed:Truncated Image")
-                    continue
+                if not os.path.exists(path+"/Image"):
+                    os.makedirs(path+"/Image")
+                img = Image.open(BytesIO(r.content))
+                img.save(path+"/Image/"+str(image_data['Name'])+'.jpg')
+                datalist.append(image_data.copy())
                 i += 1
                 if(i == numimage):
                     break
         return datalist
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--numjson', default=20)
-    parser.add_argument('--numimage', default=20)
-    parser.add_argument('--dermo', default=False)
-    parser.add_argument('--melano', default=False)
-    args = parser.parse_args()
-    ISIC_getdata(args.numjson, args.numimage, args.dermo, args.melano)
