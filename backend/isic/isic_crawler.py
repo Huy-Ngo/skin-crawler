@@ -4,6 +4,7 @@ import os
 from io import BytesIO
 from PIL import Image
 import argparse
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 """A module to fetch data from International Skin Imaging Collaboration API"""
 """For further information about the API: https://isic-archive.com/api/v1/ """
