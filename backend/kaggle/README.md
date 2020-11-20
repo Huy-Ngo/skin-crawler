@@ -10,23 +10,22 @@ import kaggle
 
 ```Python
 if kaggle.validate():
-  dataset = 'dinhanhx/skin-cancer-mnist-ham10000'
-  dataset_path = kaggle.download(dataset)
-  scm = kaggle.SkinCancerMnist(dataset_path)
-  for img_metadata in scm.get_img_metadata_list():
-    print('Image path: ', img_metadata[0])  # type(img_metadata[0]) returns str
-    print('Image info: ', img_metadata[1])  # type(img_metadata[1]) returns dict
-    print('===')
+    dataset = 'dinhanhx/skin-cancer-mnist-ham10000'
+    dataset_path = kaggle.download(dataset)
+    scm = kaggle.SkinCancerMnist(dataset_path)
+    for i in range(scm.get_len_dataset()):
+        print(scm.get_img_metadata(i))
+
 ```
 
-Firstly, it checks for kaggle api and kaggle package. Then it downloads the dataset then save it this directory `~/.kaggle/dinhanhx/skin-cancer-mnist-ham10000`. For Windows, it's `YourUserName/.kaggle/dinhanhx/skin-cancer-mnist-ham10000`. Secondly, it creates an object to manipulate the dataset. Finally it prints to stdout what that object has.
+Firstly, it checks for kaggle api and kaggle package. Then it downloads the dataset then save it to directory `~/.kaggle/dinhanhx/skin-cancer-mnist-ham10000`. For Windows, it's `YourUserName/.kaggle/dinhanhx/skin-cancer-mnist-ham10000`. Secondly, it creates an object to manipulate the dataset. Finally it prints to stdout what that object has.
 
 ## Module documentation
 
 ### Setup validation
 
 ```Python
-kaggle.validate()
+validate()
 ```
 
 `validate()` checks for the existence of package kaggle and api token file.
@@ -44,7 +43,7 @@ Returns:
 
 ```Python
 dataset = 'dinhanhx/skin-cancer-mnist-ham10000'
-dataset_path = kaggle.download(dataset)
+dataset_path = download(dataset)
 ```
 
 `download()` downloads a dataset from kaggle then save it to a directory.
@@ -72,9 +71,9 @@ A SkinCancerMnist object has
     - `__metadata_path` : a Path object
     - `__img_metadata_list` : a list of tuples. Each tuple has two elements. `First element` (Path object) is a path to an image. `Second element` (Dict object) is a metadata of an image
   - functions:
-    - `get_img_metadata_list()`
+    - `get_img_metadata()`
     - `get_dataset_url()`
-    - `export_img_to_flask()`
+    - `get_len_dataset()`
 
 `__init__()`
 
@@ -82,17 +81,8 @@ Parameters:
   - `dataset_path` : a string or any Path object.
   - `full_path` : if True then is non-relative path.
 
-`get_dataset_url()`
 
-Returns:
-  - `self.__dataset_url`
-
-`get_img_metadata_list()`
-
-Returns
-  - `self.__img_metadata_list`
-
-`export_img_to_flask()`
+`get_img_metadata()`
 Get an image and it's info from `self.__img_metadata_list`
 
 Parameters:

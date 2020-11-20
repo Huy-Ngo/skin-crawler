@@ -51,8 +51,9 @@ class SkinCancerMnist:
                 First element (Path object) is a path to an image
                 Second element (Dict object) is a metadata of an image
         functions:
-            get_img_metadata_list()
+            get_img_metadata()
             get_dataset_url()
+            get_len_dataset()
     """
     def __init__(self, dataset_path, full_path=False):
         """
@@ -90,10 +91,13 @@ class SkinCancerMnist:
                 if metada['image_id'] == img_id:
                     self.__img_metadata_list.append((img_fpath, metada))
 
-    def get_img_metadata_list(self):
-        return self.__img_metadata_list
+    # def get_img_metadata_list(self):
+    #     return self.__img_metadata_list
 
-    def export_img_to_flask(self, index=0, caption_style='HAM'):
+    def get_len_dataset(self):
+        return len(self.__img_metadata_list)
+
+    def get_img_metadata(self, index=0, caption_style='HAM'):
         """Get an image and it's info from self.__img_metadata_list
         Parameters:
             index : an int.
@@ -124,4 +128,5 @@ class SkinCancerMnist:
 if __name__ == '__main__':
     dataset_path = download('dinhanhx/skin-cancer-mnist-ham10000')
     scm = SkinCancerMnist(dataset_path)
-    print(*scm.get_img_metadata_list(), sep='\n')
+    for i in range(scm.get_len_dataset()):
+        print(scm.get_img_metadata(i))
