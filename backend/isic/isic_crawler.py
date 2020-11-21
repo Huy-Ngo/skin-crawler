@@ -86,11 +86,11 @@ def ISIC_getdata(numjson=20, numimage=20,
                 }
                 r = requests.get("https://isic-archive.com/api/v1/image/" +
                                  str(set['_id'])+"/download", headers=headers)
-                path = str(pathlib.Path(__file__).parent.absolute())
-                if not os.path.exists(path+"/Image"):
-                    os.makedirs(path+"/Image")
+                path = str(os.getcwd())
+                if not os.path.exists(path+"/static/isic"):
+                    os.makedirs(path+"/static/isic")
                 img = Image.open(BytesIO(r.content))
-                img.save(path+"/Image/"+str(image_data['Name'])+'.jpg')
+                img.save(path+"/static/isic/"+str(image_data['Name'])+'.jpg')
                 datalist.append(image_data.copy())
                 i += 1
                 if(i == numimage):
