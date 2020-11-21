@@ -92,7 +92,7 @@ def ISIC_getdata(numjson=20, numimage=20,
                                      str(set['_id'])+"/download",
                                      headers=headers)
                     img = Image.open(BytesIO(r.content))
-                    img.save(f'{dir}{image_data['Name']}.jpg')
+                    img.save(f'{dir}{image_data["Name"]}.jpg')
                 datalist.append(image_data.copy())
                 i += 1
                 if(i == numimage):
