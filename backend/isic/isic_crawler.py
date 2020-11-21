@@ -83,7 +83,8 @@ def ISIC_getdata(numjson=20, numimage=20,
                     melano_filter is False or check_melanoma(set)):
                 image_data['Name'] = str(set['name'])
                 image_data['Caption'] = str(set['_id'])
-                is_downloaded = os.path.exists(f'{dir}{image_data["Name"]}.jpg')
+                download_path = f'{dir}{image_data["Name"]}.jpg'
+                is_downloaded = os.path.exists(download_path)
                 if not is_downloaded:
                     headers = {
                         'Accept': 'application/json'
@@ -92,7 +93,7 @@ def ISIC_getdata(numjson=20, numimage=20,
                                      str(set['_id'])+"/download",
                                      headers=headers)
                     img = Image.open(BytesIO(r.content))
-                    img.save(f'{dir}{image_data["Name"]}.jpg')
+                    img.save(download_path)
                 datalist.append(image_data.copy())
                 i += 1
                 if(i == numimage):
