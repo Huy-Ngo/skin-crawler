@@ -19,6 +19,8 @@ This module download images from API and keep it in  "path/static/isic" folder o
 
 - melano_filter (or --melano if you call it in terminal_   filters out image that is not deemed "melanocytic" in the metadata. Default set to False
 
+
 - path is the folder where it will create a static/isic folder that hold all of the image in it. Default is the directory where it is run from
+
 If you want to set any of those two filters one be sure that numjson is a lot larger than numimage
 
