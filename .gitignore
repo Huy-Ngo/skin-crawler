@@ -133,6 +133,5 @@ config.json
 
 # Downloaded files
 *.jpg
-isic.json
-kaggle.json
+downloaded.json
 
