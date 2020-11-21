@@ -135,4 +135,4 @@ config.json
 *.jpg
 downloaded.json
 
-kaggle/**/*.csv
+*.csv
