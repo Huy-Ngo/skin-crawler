@@ -1,12 +1,8 @@
-from json import load, dump, dumps
+from json import dump, dumps
 from pathlib import Path
 
 from kaggle import download, validate, SkinCancerMnist
 from isic import ISIC_getdata
-
-with open('config.json', 'r') as f:
-    data = load(f)
-    host = data['host']
 
 
 def get_kaggle_full():
