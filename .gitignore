@@ -130,3 +130,9 @@ dmypy.json
 
 # Config file
 config.json
+
+# Downloaded files
+*.jpg
+downloaded.json
+
+*.csv
