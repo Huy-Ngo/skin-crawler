@@ -1,5 +1,4 @@
 import requests
-import pathlib
 import os
 from io import BytesIO
 from PIL import Image, ImageFile
@@ -7,7 +6,6 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 """A module to fetch data from International Skin Imaging Collaboration API
-
 For further information about the API: https://isic-archive.com/api/v1/
 """
 
@@ -21,7 +19,7 @@ def ISIC_request(response, num=100):
         Json: Response metadata in JSON format
     """
     start_url = f'https://isic-archive.com/api/v1/image?limit={num} \
-                  &sort=name&sortdir=-1&detail=true'
+                  &sort=name&sortdir=1&detail=true'
     headers = {'Accept': 'application/json'}
     r = requests.get(start_url, headers=headers)
     data = r.json()
@@ -59,7 +57,8 @@ def check_melanoma(metadata):
 
 def ISIC_getdata(numjson=20, numimage=20,
                  dermo_filter=False,
-                 melano_filter=False):
+                 melano_filter=False,
+                 path=os.getcwd()):
     """Download images of dermoscopic images and return their metadata.
     Parameters:
         numjson(int): Number of datasets of images from ISIC_request().
@@ -76,21 +75,25 @@ def ISIC_getdata(numjson=20, numimage=20,
         image_data = {}
         datalist = []
         i = 0
+        dir = path+"/static/isic/"
+        if not os.path.exists(dir):
+            os.makedirs(dir)
         for set in dataset:
             if(dermo_filter is False or check_dermoscopic(set) and
                     melano_filter is False or check_melanoma(set)):
                 image_data['Name'] = str(set['name'])
                 image_data['Caption'] = str(set['_id'])
-                headers = {
-                    'Accept': 'application/json'
-                }
-                r = requests.get("https://isic-archive.com/api/v1/image/" +
-                                 str(set['_id'])+"/download", headers=headers)
-                path = str(pathlib.Path(__file__).parent.absolute())
-                if not os.path.exists(path+"/Image"):
-                    os.makedirs(path+"/Image")
-                img = Image.open(BytesIO(r.content))
-                img.save(path+"/Image/"+str(image_data['Name'])+'.jpg')
+                download_path = f'{dir}{image_data["Name"]}.jpg'
+                is_downloaded = os.path.exists(download_path)
+                if not is_downloaded:
+                    headers = {
+                        'Accept': 'application/json'
+                    }
+                    r = requests.get("https://isic-archive.com/api/v1/image/" +
+                                     str(set['_id'])+"/download",
+                                     headers=headers)
+                    img = Image.open(BytesIO(r.content))
+                    img.save(download_path)
                 datalist.append(image_data.copy())
                 i += 1
                 if(i == numimage):
