@@ -9,7 +9,7 @@ with open('config.json', 'r') as f:
     host = data['host']
 
 
-def get_kaggle_full(n_images):
+def get_kaggle_full():
     """Download data from Kaggle."""
     full_data = []
 
@@ -40,9 +40,9 @@ def get_isic_full(n_images):
 
 
 if __name__ == '__main__':
-    full_kaggle = get_kaggle_full(10)
+    full_kaggle = get_kaggle_full()
     print(dumps(full_kaggle, indent=2))
-    full_isic = get_isic_full(10)
+    full_isic = get_isic_full(100)
     print(dumps(full_isic, indent=2))
     with open('downloaded.json', 'w') as f:
         dump({
