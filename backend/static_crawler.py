@@ -16,7 +16,7 @@ def get_kaggle_full(n_images):
     if validate():
         dataset = 'dinhanhx/skin-cancer-mnist-ham10000'
         path = Path('./static/kaggle')
-        dataset_path= download(dataset, path)
+        dataset_path = download(dataset, path)
         scm = SkinCancerMnist(dataset_path)
         for i in range(scm.get_len_dataset()):
             full_data.append(scm.get_img_metadata(i))
