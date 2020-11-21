@@ -1,29 +1,41 @@
+from json import load
+from random import shuffle
+
 from flask import Flask
-from utils import get_isic_full
+
+with open('downloaded.json', 'r') as f:
+    data = load(f)
+    kaggle_data = data['kaggle']
+    isic_data = data['isic']
 
 app = Flask(__name__)
-
-
-@app.route('/images/<name>')
-def get_image(name):
-    """Serve images in the image folder."""
-    pass
 
 
 @app.route('/kaggle/<int:num_img>')
 def get_kaggle(num_img):
     """Get `num_img` images from Kaggle API."""
-    pass
+    data = kaggle_data
+    if len(data) > num_img:
+        shuffle(data)
+        data = data[:num_img]
+    return {'data': data}
 
 
 @app.route('/isic/<int:num_img>')
 def get_isic(num_img):
     """Get `num_img` images from ISIC API."""
-    full_data = get_isic_full(num_img)
-    return {'data': full_data}
+    data = isic_data
+    if len(data) > num_img:
+        shuffle(data)
+        data = data[:num_img]
+    return {'data': data}
 
 
 @app.route('/all/<int:num_img>')
 def get_all(num_img):
     """Get `num_img` images from all sources."""
-    pass
+    data = kaggle_data + isic_data
+    if len(data) > num_img:
+        shuffle(data)
+        data = data[:num_img]
+    return {'data': data}
