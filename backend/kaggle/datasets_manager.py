@@ -39,7 +39,7 @@ def download(dataset, download_path=DEFAULT_DOWNLOAD_PATH):
 
 class SkinCancerMnist:
     """Make an object manipulating dataset skin-cancer-minist-ham10000
-    from kmader
+    only from dinhanhx
 
     A SkinCancerMnist object has
         attributes:
@@ -72,12 +72,8 @@ class SkinCancerMnist:
                                          'HAM10000_metadata.csv')
 
         img_fpath_list = [path.join(self.__dataset_path, f)
-                          for f in os.listdir(path.join(self.__dataset_path,
-                                                        'HAM10000_images_part_1/'))]  # noqa: E501
-
-        img_fpath_list += [path.join(self.__dataset_path, f)
-                           for f in os.listdir(path.join(self.__dataset_path,
-                                                         'HAM10000_images_part_2/'))]  # noqa: E501
+                          for f in os.listdir(self.__dataset_path)
+                          if '.csv' not in f]
 
         metadata_list = []
         with open(self.__metadata_path, 'r') as f:

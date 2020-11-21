@@ -59,7 +59,6 @@ Returns:
 
 ```Python
 scm = SkinCancerMnist(dataset_path)
-print(*scm.get_img_metadata_list(), sep='\n')
 ```
 
 `class SkinCancerMnist` makes an object manipulating dataset skin-cancer-minist-ham10000 from dinhanhx
