@@ -38,13 +38,6 @@ def get_isic(num_img):
     return {'data': data}
 
 
-@app.route('/isic/<int:num_img>')
-def get_isic(num_img):
-    """Get `num_img` images from ISIC API."""
-    full_data = get_isic_full(num_img)
-    return {'data': full_data}
-
-
 @app.route('/all/<int:num_img>')
 def get_all(num_img):
     """Get `num_img` images from all sources."""
