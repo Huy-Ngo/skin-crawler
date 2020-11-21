@@ -14,25 +14,24 @@ def download(dataset, download_path=DEFAULT_DOWNLOAD_PATH):
 
     Return:
         dataset_path : full folder path where dataset is downloaded.
-        None : if dataset is already existed in download path.
 
     Example:
         This is a link to a kaggle dataset:
-        https://www.kaggle.com/aungpyaeap/tictactoe-endgame-dataset-uci
+        https://www.kaggle.com/dinhanhx/skin-cancer-mnist-ham10000
 
-        dataset = 'aungpyaeap/tictactoe-endgame-dataset-uci'
+        dataset = 'dinhanhx/skin-cancer-mnist-ham10000'
         download_path = '~/.kaggle/'
         dataset_path = download(dataset, download_path)
 
-        dataset_path = '~/.kaggle/aungpyaeap/tictactoe-endgame-dataset-uci/'
+        dataset_path = '~/.kaggle/dinhanhx/skin-cancer-mnist-ham10000/'
     """
+    dataset_path = path.join(download_path, Path(dataset))
     try:
         os.mkdir(path.join(download_path, Path(dataset.split('/')[0])))
-        dataset_path = path.join(download_path, Path(dataset))
         os.mkdir(dataset_path)
-
     except FileExistsError:
-        return None
+        print(f'{dataset_path} already exists.')
+        return dataset_path
 
     os.system(f'kaggle datasets download {dataset} -p {dataset_path} --unzip')
     return dataset_path
@@ -52,8 +51,9 @@ class SkinCancerMnist:
                 First element (Path object) is a path to an image
                 Second element (Dict object) is a metadata of an image
         functions:
-            get_img_metadata_list()
+            get_img_metadata()
             get_dataset_url()
+            get_len_dataset()
     """
     def __init__(self, dataset_path, full_path=False):
         """
@@ -62,7 +62,7 @@ class SkinCancerMnist:
             full_path : if True then is non-relative path.
         """
         self.__dataset_url = 'https://www.kaggle.com/' \
-                             'kmader/skin-cancer-mnist-ham10000'
+                             'dinhanhx/skin-cancer-mnist-ham10000'
 
         self.__dataset_path = Path(dataset_path)
         if full_path:
@@ -91,14 +91,42 @@ class SkinCancerMnist:
                 if metada['image_id'] == img_id:
                     self.__img_metadata_list.append((img_fpath, metada))
 
-    def get_img_metadata_list(self):
-        return self.__img_metadata_list
+    # def get_img_metadata_list(self):
+    #     return self.__img_metadata_list
+
+    def get_len_dataset(self):
+        return len(self.__img_metadata_list)
+
+    def get_img_metadata(self, index=0, caption_style='HAM'):
+        """Get an image and it's info from self.__img_metadata_list
+        Parameters:
+            index : an int.
+            caption_style : a str.
+        Returns:
+            a dictionary has
+                - 'Image path'
+                - 'Host'
+                - 'Original url'
+                - 'Caption'
+        """
+        img_metadata = self.__img_metadata_list[index]
+        if caption_style == 'HAM':
+            return {'Image path': img_metadata[0],
+                    'Host': 'Kaggle',
+                    'Original url': self.__dataset_url,
+                    'Caption': img_metadata[1]['lesion_id']}
+        else:
+            return {'Image path': img_metadata[0],
+                    'Host': 'Kaggle',
+                    'Original url': self.__dataset_url,
+                    'Caption': img_metadata[1]['image_id']}
 
     def get_dataset_url(self):
         return self.__dataset_url
 
 
 if __name__ == '__main__':
-    dataset_path = 'data/kmader/skin-cancer-mnist-ham10000/'
+    dataset_path = download('dinhanhx/skin-cancer-mnist-ham10000')
     scm = SkinCancerMnist(dataset_path)
-    print(*scm.get_img_metadata_list(), sep='\n')
+    for i in range(scm.get_len_dataset()):
+        print(scm.get_img_metadata(i))
