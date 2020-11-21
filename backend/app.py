@@ -2,7 +2,6 @@ from json import load
 from random import shuffle
 
 from flask import Flask
-from utils import get_isic_full
 
 with open('downloaded.json', 'r') as f:
     data = load(f)
@@ -10,12 +9,6 @@ with open('downloaded.json', 'r') as f:
     isic_data = data['isic']
 
 app = Flask(__name__)
-
-
-@app.route('/images/<name>')
-def get_image(name):
-    """Serve images in the image folder."""
-    pass
 
 
 @app.route('/kaggle/<int:num_img>')
