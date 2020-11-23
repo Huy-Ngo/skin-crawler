@@ -1,45 +1,47 @@
-# flake8: noqa W191
 import requests
 from bs4 import BeautifulSoup
+import re
 
 
-def wikimedia_crawl(page=100):
-	"""To get images from wikimedia when search for skin cancer.
+def wikimedia_crawl(result=100):
+    """To get images from wikimedia when search for skin cancer.
 
-	Parameters
-		page : int.
+    Parameters
+        result : int.
 
-	Returns:
-		A list of dictionaries.
-		Each dictionary has
-			- Image source: an url
-			- Host: "Wikimedia"
-			- Original URL: an url
-			- Title: "Wikimedia <number>"
-	"""
-	url = f"https://commons.wikimedia.org/w/index.php?title=Special:Search&limit=\
-	{page}&offset=0&profile=default&search=Basal-cell+carcinoma\
-	&advancedSearch-current={{}}&ns0=1&ns6=1&ns12=1&ns14=1&ns100=1&ns106=1"
+    Returns:
+        A list of dictionaries.
+        Each dictionary has
+            - Image source: an url
+            - Host: "Wikimedia"
+            - Original URL: an url
+            - Title: "Title"
+    """
+    url = f"https://commons.wikimedia.org/w/index.php?title=Special:Search&limit=\
+    {result}&offset=0&profile=default&search=Basal-cell+carcinoma\
+    &advancedSearch-current={{}}&ns0=1&ns6=1&ns12=1&ns14=1&ns100=1&ns106=1"
 
-	response = requests.get(url)
-	soup = BeautifulSoup(response.content, "lxml")
-	images = soup.find_all("img")
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, "lxml")
 
-	number = 0
-	data_list = []
-	for image in images:
-		image_src = image["src"]
-		title = "Wikimedia "+str(number)
-		number += 1
-		data = {}
-		data['Image source'] = image_src
-		data['Host'] = "Wikimedia"
-		data['Origin URL'] = url
-		data['Title'] = title
-		data_list.append(data)
+    infos = soup.find_all("a","image")
+    data_list = []
+    for info in infos:
+        title = info["href"].replace("/wiki/","")
+        origin_url = "mediawiki.org" + info["href"]
+        data = {}
+        #request to origin url to get full image
+        res = requests.get("http://" + origin_url)
+        sp = BeautifulSoup(res.content, "lxml")
+        image = sp.find("img")
+        data['Host'] = "Wikimedia"
+        data['Origin URL'] = origin_url
+        data['Title'] = title
+        data['Image source'] = image["src"]
+        data_list.append(data)
 
-	return data_list
+    return data_list
 
 
 if __name__ == '__main__':
-	wikimedia_crawl(100)
+    wikimedia_crawl(100)
