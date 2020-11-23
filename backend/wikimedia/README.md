@@ -21,12 +21,12 @@ wikimedia_crawl(result=10)
 To get images from wikimedia when search for skin cancer.
 
 Parameters:
-- `page` : int.
+- `result` : int.
 
 Returns:
 A list of dictionaries.
 Each dictionary has
-- `Image source`: an url
+- `Image source`: The image address
 - `Host`: "Wikimedia"
-- `Original URL`: an url
+- `Original URL`: URL to the web page where the image is found
 - `Title`: "Title"
