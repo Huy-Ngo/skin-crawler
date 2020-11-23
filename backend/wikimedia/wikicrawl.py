@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import re
 
 
 def wikimedia_crawl(result=100):
@@ -24,13 +23,13 @@ def wikimedia_crawl(result=100):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "lxml")
 
-    infos = soup.find_all("a","image")
+    infos = soup.find_all("a", "image")
     data_list = []
     for info in infos:
-        title = info["href"].replace("/wiki/","")
+        title = info["href"].replace("/wiki/", "")
         origin_url = "mediawiki.org" + info["href"]
         data = {}
-        #request to origin url to get full image
+        # request to origin url to get full image
         res = requests.get("http://" + origin_url)
         sp = BeautifulSoup(res.content, "lxml")
         image = sp.find("img")
