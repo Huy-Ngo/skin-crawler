@@ -1,7 +1,6 @@
+# flake8: noqa W191
 import requests
 from bs4 import BeautifulSoup
-import urllib.request
-import json
 
 
 def wikimedia_crawl(page=100):
@@ -40,6 +39,7 @@ def wikimedia_crawl(page=100):
 		data_list.append(data)
 
 	return data_list
+
 
 if __name__ == '__main__':
 	wikimedia_crawl(100)
