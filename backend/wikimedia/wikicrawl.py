@@ -27,10 +27,10 @@ def wikimedia_crawl(result=100):
     data_list = []
     for info in infos:
         title = info["href"].replace("/wiki/", "")
-        origin_url = "mediawiki.org" + info["href"]
+        origin_url = "https://commons.wikimedia.org" + info["href"]
         data = {}
         # request to origin url to get full image
-        res = requests.get("http://" + origin_url)
+        res = requests.get(origin_url)
         sp = BeautifulSoup(res.content, "lxml")
         image = sp.find("img")
         data['Host'] = "Wikimedia"
