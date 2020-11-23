@@ -11,9 +11,9 @@ def wikimedia_crawl(result=100):
     Returns:
         A list of dictionaries.
         Each dictionary has
-            - Image source: an url
+            - Image source: The image address
             - Host: "Wikimedia"
-            - Original URL: an url
+            - Original URL: URL to the web page where the image is found
             - Title: "Title"
     """
     url = f"https://commons.wikimedia.org/w/index.php?title=Special:Search&limit=\
