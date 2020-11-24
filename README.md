@@ -17,7 +17,7 @@ The frontend consumes the API and displays information to the user.
 - Run Flask server:
 
 ```bash
-EXPORT FLASK_APP=app.py
-EXPORT FLASK_ENV=development
+export FLASK_APP=app.py
+export FLASK_ENV=development
 flask run
 ```
