@@ -1,0 +1,1 @@
+from .wikicrawl import wikimedia_crawl

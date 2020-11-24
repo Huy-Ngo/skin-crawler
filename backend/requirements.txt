@@ -9,6 +9,7 @@ importlib-metadata==2.0.0
 itsdangerous==1.1.0
 Jinja2==2.11.2
 kaggle==1.5.9
+lxml==4.6.1
 MarkupSafe==1.1.1
 mccabe==0.6.1
 Pillow==8.0.1
