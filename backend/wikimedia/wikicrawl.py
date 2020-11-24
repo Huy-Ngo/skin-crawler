@@ -21,7 +21,7 @@ def wikimedia_crawl(result=100):
     &advancedSearch-current={{}}&ns0=1&ns6=1&ns12=1&ns14=1&ns100=1&ns106=1"
 
     response = requests.get(url)
-    soup = BeautifulSoup(response.content, "lxml")
+    soup = BeautifulSoup(response.content, "html.parser")
 
     infos = soup.find_all("a", "image")
     data_list = []
@@ -31,7 +31,7 @@ def wikimedia_crawl(result=100):
         data = {}
         # request to origin url to get full image
         res = requests.get(origin_url)
-        sp = BeautifulSoup(res.content, "lxml")
+        sp = BeautifulSoup(res.content, "html.parser")
         image = sp.find("img")
         data['Host'] = "Wikimedia"
         data['Origin URL'] = origin_url
