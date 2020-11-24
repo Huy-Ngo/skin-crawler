@@ -1,8 +1,8 @@
 from json import dump, dumps
 from pathlib import Path
 
-from kaggle import download, validate, SkinCancerMnist
 from isic import ISIC_getdata
+from kaggle import download, validate, SkinCancerMnist
 
 
 def get_kaggle_full():
