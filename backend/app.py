@@ -20,7 +20,7 @@ def fetch_wiki(num_img):
         new_entry = {
             'path': entry['Image source'],
             'original_host': entry['Host'],
-            'original_link': entry['Original URL'],
+            'original_link': entry['Origin URL'],
             'caption': entry['Title']
         }
         data.append(new_entry)
