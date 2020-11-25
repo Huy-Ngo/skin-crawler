@@ -23,7 +23,7 @@ def yandex_crawler(max_pic_num):
     for link in soup.findAll('a', {"class": "serp-item__link"}):
         # get link
         href = link.get('href')
-        yandex_link="https://yandex.com/" + href
+        yandex_link = "https://yandex.com/" + href
         # getimage link
         string = href.split("img_url=")[1]
         convert = string.replace("%2F", "/")
@@ -34,7 +34,8 @@ def yandex_crawler(max_pic_num):
         data['Image source'] = og_link
         data['Host'] = "Yandex"
         data['Origin URL'] = yandex_link
-        data['Title'] = "\n".join([img['alt'] for img in link.findChildren("img", alt = True)])
+        data['Title'] = "\n".join([img['alt'] for img in link.findChildren(
+            "img", alt=True)])
         data_list.append(data)
 
         if (counter == max_pic_num):
