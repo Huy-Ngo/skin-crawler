@@ -3,62 +3,50 @@ from random import shuffle
 
 from flask import Flask
 
-from wikimedia import wikimedia_crawl
-
 with open('downloaded.json', 'r') as f:
     data = load(f)
     kaggle_data = data['kaggle']
     isic_data = data['isic']
+    wiki_data = data['wiki']
 
 app = Flask(__name__)
 
 
-def fetch_wiki(num_img):
-    unformatted_data = wikimedia_crawl(num_img)
-    data = []
-    for entry in unformatted_data:
-        new_entry = {
-            'path': entry['Image source'],
-            'original_host': entry['Host'],
-            'original_link': entry['Origin URL'],
-            'caption': entry['Title']
-        }
-        data.append(new_entry)
+def randomize(data, n_images):
+    """Get randomly `n_images` from data.
+
+    Return the unchanged data
+    if the data size is smaller or equal to `n_images`.
+    """
+    if len(data) > n_images:
+        shuffle(data)
+        data = data[:n_images]
     return data
 
 
-@app.route('/kaggle/<int:num_img>')
-def get_kaggle(num_img):
-    """Get `num_img` images from Kaggle API."""
-    data = kaggle_data
-    if len(data) > num_img:
+@app.route('/kaggle/<int:n_images>')
+def get_kaggle(n_images):
+    """Get `n_images` images from Kaggle API."""
+    return {'data': randomize(kaggle_data, n_images)}
+
+
+@app.route('/isic/<int:n_images>')
+def get_isic(n_images):
+    """Get `n_images` images from ISIC API."""
+    return {'data': randomize(isic_data, n_images)}
+
+
+@app.route('/wiki/<int:n_images>')
+def get_wiki(n_images):
+    """Get `n_images` images from WikiMedia."""
+    return {'data': randomize(wiki_data, n_images)}
+
+
+@app.route('/all/<int:n_images>')
+def get_all(n_images):
+    """Get `n_images` images from all sources."""
+    data = kaggle_data + isic_data + wiki_data
+    if len(data) > n_images:
         shuffle(data)
-        data = data[:num_img]
-    return {'data': data}
-
-
-@app.route('/isic/<int:num_img>')
-def get_isic(num_img):
-    """Get `num_img` images from ISIC API."""
-    data = isic_data
-    if len(data) > num_img:
-        shuffle(data)
-        data = data[:num_img]
-    return {'data': data}
-
-
-@app.route('/wiki/<int:num_img>')
-def get_wiki(num_img):
-    """Get `num_img` images from WikiMedia."""
-    return {'data': fetch_wiki(num_img)}
-
-
-@app.route('/all/<int:num_img>')
-def get_all(num_img):
-    """Get `num_img` images from all sources."""
-    data = kaggle_data + isic_data
-    data += fetch_wiki(100)
-    if len(data) > num_img:
-        shuffle(data)
-        data = data[:num_img]
+        data = data[:n_images]
     return {'data': data}
