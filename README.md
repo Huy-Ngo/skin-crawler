@@ -13,7 +13,7 @@ The frontend consumes the API and displays information to the user.
 ### Backend
 
 - Add Kaggle API token at `~/.kaggle/kaggle.json`
-- In `backend/`, run `static_crawler.py`, since we use some sources that forces us to download the images
+- In `backend/`, run `static_crawler.py`. The crawling process takes some time.
 - Run Flask server:
 
 ```bash
