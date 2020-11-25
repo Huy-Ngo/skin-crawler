@@ -4,19 +4,18 @@
 
 ```Python
 import json
-from yandex import spider
-data_list = spider(10)
+from yandex import yandex_crawler
+data_list = yandex_crawler(10)
 for data in data_list:
     print(json.dumps(data, indent=2))
 ```
 
-
 ## Module documentation
 
-### wikimedia_crawl
+### yandex_crawler
 
 ```Python
-spider(10)
+yandex_crawler(10)
 ```
 To get images from Yandex when search for skin cancer dermoscopy.
 
@@ -26,7 +25,7 @@ Parameters:
 Returns:
 A list of dictionaries.
 Each dictionary has
-- `Image source`: an url
+- `Image source`: The image address
 - `Host`: "Yandex"
-- `Original URL`: an url
-- `Title`: "Yandex" + the order of current picture
+- `Original URL`: URL to the web page where the image is found
+- `Title`: The title of the image
