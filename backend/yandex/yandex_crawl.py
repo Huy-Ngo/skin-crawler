@@ -47,5 +47,5 @@ def yandex_crawler(max_pic_num):
             counter += 1
     return data_list
 
-if __name__ == '__main__':
+ if __name__ == '__main__':
     yandex_crawler(5)
