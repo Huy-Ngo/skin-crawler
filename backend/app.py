@@ -8,6 +8,7 @@ with open('downloaded.json', 'r') as f:
     kaggle_data = data['kaggle']
     isic_data = data['isic']
     wiki_data = data['wiki']
+    yandex_data = data['yandex']
 
 app = Flask(__name__)
 
@@ -42,10 +43,16 @@ def get_wiki(n_images):
     return {'data': randomize(wiki_data, n_images)}
 
 
+@app.route('/wiki/<int:n_images>')
+def get_yandex(n_images):
+    """Get `n_images` images from WikiMedia."""
+    return {'data': randomize(yandex_data, n_images)}
+
+
 @app.route('/all/<int:n_images>')
 def get_all(n_images):
     """Get `n_images` images from all sources."""
-    data = kaggle_data + isic_data + wiki_data
+    data = kaggle_data + isic_data + wiki_data + yandex_data
     if len(data) > n_images:
         shuffle(data)
         data = data[:n_images]
