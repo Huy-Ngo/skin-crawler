@@ -43,7 +43,7 @@ def get_wiki(n_images):
     return {'data': randomize(wiki_data, n_images)}
 
 
-@app.route('/wiki/<int:n_images>')
+@app.route('/yandex/<int:n_images>')
 def get_yandex(n_images):
     """Get `n_images` images from WikiMedia."""
     return {'data': randomize(yandex_data, n_images)}
