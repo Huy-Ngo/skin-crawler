@@ -27,6 +27,11 @@ if __name__ == '__main__':
     full_isic = ISIC_getdata(300, 300)
     full_wiki = wikimedia_crawl(500)
     full_yandex = yandex_crawler(20)
+    print('Crawled:')
+    print(len(full_kaggle), 'image(s) from Kaggle')
+    print(len(full_isic), 'image(s) from ISIC')
+    print(len(full_wiki), 'image(s) from Wikimedia')
+    print(len(full_yandex), 'image(s) from Yandex Image')
     with open('data.json', 'w') as f:
         dump({
             'kaggle': full_kaggle,
