@@ -28,9 +28,9 @@ def yandex_crawler(max_pic_num):
         # get link
         href = link.get('href')
         # getimage link
-        img_link = href.split("img_url=")[1]
-        img_link = img_link.replace("%2F", "/")
-        img_link = img_link.replace("%3A", ":")
+        img_link = href.split('img_url=')[1]
+        img_link = img_link.replace('%2F', '/')
+        img_link = img_link.replace('%3A', ':')
         img_link = img_link.split('&text')[0]
         # adding dict
         data = {}
