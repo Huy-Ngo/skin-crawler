@@ -53,7 +53,35 @@ def get_yandex(n_images):
 def get_all(n_images):
     """Get `n_images` images from all sources."""
     data = kaggle_data + isic_data + wiki_data + yandex_data
-    if len(data) > n_images:
-        shuffle(data)
-        data = data[:n_images]
+    return {'data': randomize(data, n_images)}
+
+
+@app.route('/kaggle')
+def get_kaggle():
+    """Get `n_images` images from Kaggle API."""
+    return {'data': kaggle_data)}
+
+
+@app.route('/isic')
+def get_isic():
+    """Get `n_images` images from ISIC API."""
+    return {'data': isic_data}
+
+
+@app.route('/wiki')
+def get_wiki():
+    """Get `n_images` images from WikiMedia."""
+    return {'data': wiki_data}
+
+
+@app.route('/yandex')
+def get_yandex():
+    """Get `n_images` images from WikiMedia."""
+    return {'data': yandex_data}
+
+
+@app.route('/all')
+def get_all():
+    """Get `n_images` images from all sources."""
+    data = kaggle_data + isic_data + wiki_data + yandex_data
     return {'data': data}
