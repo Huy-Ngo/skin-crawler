@@ -93,29 +93,29 @@ class SkinCancerMnist:
     def get_len_dataset(self):
         return len(self.__img_metadata_list)
 
-    def get_img_metadata(self, index=0, caption_style='HAM'):
+    def get_img_metadata(self, index=0, title_style='HAM'):
         """Get an image and it's info from self.__img_metadata_list
         Parameters:
             index : an int.
-            caption_style : a str.
+            title_style : a str.
         Returns:
             a dictionary has
-                - 'Image path'
-                - 'Host'
-                - 'Original url'
-                - 'Caption'
+                - 'image'
+                - 'host'
+                - 'original'
+                - 'title'
         """
         img_metadata = self.__img_metadata_list[index]
-        if caption_style == 'HAM':
-            return {'Image path': img_metadata[0],
-                    'Host': 'Kaggle',
-                    'Original url': self.__dataset_url,
-                    'Caption': img_metadata[1]['lesion_id']}
+        if title_style == 'HAM':
+            return {'image': img_metadata[0],
+                    'host': 'Kaggle',
+                    'original': self.__dataset_url,
+                    'title': img_metadata[1]['lesion_id']}
         else:
-            return {'Image path': img_metadata[0],
-                    'Host': 'Kaggle',
-                    'Original url': self.__dataset_url,
-                    'Caption': img_metadata[1]['image_id']}
+            return {'image': img_metadata[0],
+                    'host': 'Kaggle',
+                    'original': self.__dataset_url,
+                    'title': img_metadata[1]['image_id']}
 
     def get_dataset_url(self):
         return self.__dataset_url
