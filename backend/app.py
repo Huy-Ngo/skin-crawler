@@ -57,31 +57,31 @@ def get_all(n_images):
 
 
 @app.route('/kaggle')
-def get_kaggle():
+def get_kaggle_full():
     """Get `n_images` images from Kaggle API."""
-    return {'data': kaggle_data)}
+    return {'data': kaggle_data}
 
 
 @app.route('/isic')
-def get_isic():
+def get_isic_full():
     """Get `n_images` images from ISIC API."""
     return {'data': isic_data}
 
 
 @app.route('/wiki')
-def get_wiki():
+def get_wiki_full():
     """Get `n_images` images from WikiMedia."""
     return {'data': wiki_data}
 
 
 @app.route('/yandex')
-def get_yandex():
+def get_yandex_full():
     """Get `n_images` images from WikiMedia."""
     return {'data': yandex_data}
 
 
 @app.route('/all')
-def get_all():
+def get_all_full():
     """Get `n_images` images from all sources."""
     data = kaggle_data + isic_data + wiki_data + yandex_data
     return {'data': data}
