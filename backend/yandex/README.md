@@ -17,7 +17,7 @@ for data in data_list:
 ```Python
 yandex_crawler(10)
 ```
-To get images from Yandex when search for skin cancer dermoscopy.
+Get images from Yandex when search for skin cancer dermoscopy.
 
 Parameters:
 - `max_pic_num` : int.

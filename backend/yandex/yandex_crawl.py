@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 
 def yandex_crawler(max_pic_num):
-    """ To get images from Yandex when search for skin cancer dermoscopy.
+    """Get images from Yandex when search for skin cancer dermoscopy.
     Parameters:
         max_pic_num : int.
 
