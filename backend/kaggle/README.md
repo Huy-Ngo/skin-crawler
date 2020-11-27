@@ -89,8 +89,9 @@ Parameters:
   - `caption_style` : a str.
 
 Returns:
-  - a dictionary has
-    - 'Image path' : full path to image
-    - 'Host' : name of host
-    - 'Original url' : orignal url
-    - 'Caption' : image id
+A list of dictionaries.
+Each dictionary has
+- `image`: image address can be file path or url.
+- `host`: "Kaggle"
+- `original`: URL to the web page where the image is found
+- `title`: the title of the image
