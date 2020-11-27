@@ -24,7 +24,7 @@ def get_kaggle_full():
 
 if __name__ == '__main__':
     full_kaggle = get_kaggle_full()
-    full_isic = ISIC_getdata(100, 100)
+    full_isic = ISIC_getdata(300, 300)
     full_wiki = wikimedia_crawl(500)
     full_yandex = yandex_crawler(20)
     with open('data.json', 'w') as f:
