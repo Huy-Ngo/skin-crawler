@@ -3,7 +3,7 @@ from random import shuffle
 
 from flask import Flask
 
-with open('downloaded.json', 'r') as f:
+with open('data.json', 'r') as f:
     data = load(f)
     kaggle_data = data['kaggle']
     isic_data = data['isic']
