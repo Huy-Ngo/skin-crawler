@@ -3,18 +3,17 @@ from bs4 import BeautifulSoup
 
 
 def wikimedia_crawl(result=100):
-    """To get images from wikimedia when search for skin cancer.
-
-    Parameters
+    """Get images from wikimedia when search for skin cancer.
+    Parameters:
         result : int.
 
     Returns:
         A list of dictionaries.
         Each dictionary has
-            - Image source: The image address
-            - Host: "Wikimedia"
-            - Original URL: URL to the web page where the image is found
-            - Title: "Title"
+            - image: The image address
+            - host: "Wikimedia"
+            - original: URL to the web page where the image is found
+            - title: the title of the image
     """
     url = f"https://commons.wikimedia.org/w/index.php?title=Special:Search&limit=\
     {result}&offset=0&profile=default&search=Basal-cell+carcinoma\
@@ -33,10 +32,10 @@ def wikimedia_crawl(result=100):
         res = requests.get(origin_url)
         sp = BeautifulSoup(res.content, "html.parser")
         image = sp.find("img")
-        data['Host'] = "Wikimedia"
-        data['Origin URL'] = origin_url
-        data['Title'] = title
-        data['Image source'] = image["src"]
+        data['host'] = "Wikimedia"
+        data['original'] = origin_url
+        data['title'] = title
+        data['image'] = image["src"]
         data_list.append(data)
 
     return data_list

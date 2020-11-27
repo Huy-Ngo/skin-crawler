@@ -7,7 +7,7 @@ import json
 from wikimedia import wikimedia_crawl
 data_list = wikimedia_crawl(result=10)
 for data in data_list:
-    print(json.dumps(data, indent=2))
+    print(json.dumps(data, indent=4))
 ```
 
 
@@ -26,7 +26,7 @@ Parameters:
 Returns:
 A list of dictionaries.
 Each dictionary has
-- `Image source`: The image address
-- `Host`: "Wikimedia"
-- `Original URL`: URL to the web page where the image is found
-- `Title`: "Title"
+- `image`: The image address
+- `host`: "Wikimedia"
+- `original`: URL to the web page where the image is found
+- `title`: the title of the image
