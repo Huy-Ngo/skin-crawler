@@ -7,9 +7,12 @@ ISIC_getdata(numjson = 20,numimage = 20,dermo_filter = False,melano_filter = Fal
 
 ## Output
 
-It will download numimage images out of numjson json responses.Be sure that numjson is larger than or equal to numimage at all times
-
-This module download images from API and keep it in  "path/static/isic" folder of the directory,with path default being the current directory from where it is run from
+A list of dictionaries.
+Each dictionary has
+- `image`: image address can be file path or url.
+- `host`: "ISIC API"
+- `original`: URL to the web page where the image is found
+- `title`: the title of the image
 
 ## Input
 
@@ -23,4 +26,3 @@ This module download images from API and keep it in  "path/static/isic" folder o
 - path is the folder where it will create a static/isic folder that hold all of the image in it. Default is the directory where it is run from
 
 If you want to set any of those two filters one be sure that numjson is a lot larger than numimage
-

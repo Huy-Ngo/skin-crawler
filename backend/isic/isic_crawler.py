@@ -98,4 +98,15 @@ def ISIC_getdata(numjson=20, numimage=20,
                 i += 1
                 if(i == numimage):
                     break
-        return datalist
+
+        formatted_datalist = []
+        for data in datalist:
+            formatted_data = {
+                'image': f'static/isic/{data["Name"]}.jpg',
+                'host': 'ISIC API',
+                'original': 'https://isic-archive.com/api/v1/',
+                'title': f'ISIC {data["Caption"]}'
+            }
+            formatted_datalist.append(formatted_data)
+
+        return formatted_datalist
