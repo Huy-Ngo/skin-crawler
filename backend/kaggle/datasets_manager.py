@@ -1,7 +1,7 @@
 import os
 import csv
 from os import path
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 DEFAULT_DOWNLOAD_PATH = path.join(Path.home(), Path('.kaggle/'))
 
@@ -107,12 +107,12 @@ class SkinCancerMnist:
         """
         img_metadata = self.__img_metadata_list[index]
         if title_style == 'HAM':
-            return {'image': img_metadata[0],
+            return {'image': str(PurePosixPath(Path(img_metadata[0]))),
                     'host': 'Kaggle',
                     'original': self.__dataset_url,
                     'title': img_metadata[1]['lesion_id']}
         else:
-            return {'image': img_metadata[0],
+            return {'image': str(PurePosixPath(Path(img_metadata[0]))),
                     'host': 'Kaggle',
                     'original': self.__dataset_url,
                     'title': img_metadata[1]['image_id']}
@@ -122,7 +122,7 @@ class SkinCancerMnist:
 
 
 if __name__ == '__main__':
-    dataset_path = download('dinhanhx/skin-cancer-mnist-ham10000')
+    dataset_path = download('dinhanhx/skin-cancer-mnist-ham10000', '.')
     scm = SkinCancerMnist(dataset_path)
     for i in range(scm.get_len_dataset()):
         print(scm.get_img_metadata(i))
