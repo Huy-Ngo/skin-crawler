@@ -8,29 +8,57 @@
 </head>
 <body>
 	<div class="header">
-		<a href="../index.html" class="title">Skin Crawler</a>
-		<div class="rec"></div>
-		<div class="ellipse"></div>
+		<a href="../index.html" class="header__title">Skin Crawler</a>
+		<div class="header__rec"></div>
+		<div class="header__ellipse"></div>
 	</div>
-	<div class=”gallery”>
-  		<figure class="gallery__item gallery__item--1">
-    		<img src="img/image-1.jpg" class="gallery__img" alt="Image 1">
-  		</figure>
-  		<figure class="gallery__item gallery__item--2">
-    		<img src="img/image-2.jpg" class="gallery__img" alt="Image 2">
-  		</figure>
-  		<figure class="gallery__item gallery__item--3">
-    		<img src="img/image-3.jpg" class="gallery__img" alt="Image 3">
-  		</figure>
-  		<figure class="gallery__item gallery__item--4">
-    		<img src="img/image-4.jpg" class="gallery__img" alt="Image 4">
-  		</figure>
-  		<figure class="gallery__item gallery__item--5">
-    		<img src="img/image-5.jpg" class="gallery__img" alt="Image 5">
-  		</figure>
-  		<figure class="gallery__item gallery__item--6">
-    		<img src="img/image-6.jpg" class="gallery__img" alt="Image 6">
-  		</figure>
-		</div>
+  <section class="container" id="inf-img">
+    <script>
+        function addImage() {
+            var data = JSON.parse('{{ data | tojson | safe}}');
+            var src = data.image 
+            document.getElementById("inf-img").innerHTML +=  
+              '<div>\
+                  <img src=\" ${data.image}\" class=\"container__img\" alt=\"Image 1\">\
+                  <span class=\"title\">${data.title}</span>\
+                </div>'; 
+        } 
+    </script>
+    <div>
+      <img src="https://www.victoriaskincancerscreening.com/media/filter/large/img/basal_cell_carcinoma_4_large.jpg" class="container__img" alt="Image 1">
+      <span class="title">Basal Cell Carcinoma (BCC) Skin Cancer.</span>
+    </div>
+    <div>
+      <img src="https://www.medicaljournals.se/acta/html-editor/html-img/4997/4997_6209.png" class="container__img" alt="Image 2">
+      <span class="title">1. Colours and structures viewed by dermoscopy.</span>
+    </div>
+    <div>
+      <img src="https://www.skinintegrity.com.au/images/otherSkinCancers/Basal/bcc31.jpg" class="container__img" alt="Image 3">
+      <span class="title">Carcinoma Dermoscopy.</span>
+    </div>
+    <div>
+      <img src="http://www.betterfamilyhealth.org/images/483xNxbenign-mole1.jpg.pagespeed.ic.-E8egXuWvx.jpg" class="container__img" alt="Image 4">
+      <span class="title">Dermatology Treatments for Skin &amp; othe Medical Conditions.</span>
+    </div>
+    <div>
+      <img src="https://dermoscopy.files.wordpress.com/2019/06/suspected-mis-lines-angulated-10870584-copy.jpg%3Fw%3D1024" class="container__img" alt="Image 5">
+      <span class="title">Odd looking mole picked up on skin check was an early melanoma.</span>
+    </div>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Micrograph_of_spindle_cell_%28sarcomatoid%29_squamous_cell_carcinoma.jpg/800px-Micrograph_of_spindle_cell_%28sarcomatoid%29_squamous_cell_carcinoma.jpg" class="container__img" alt="Image 6">
+      <span class="title">File:Micrograph_of_spindle_cell_(sarcomatoid)_squamous_cell_carcinoma.jpg</span>
+    </div>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Micrograph_of_intraductal_carcinoma_of_the_prostate_with_very_patchy_basal_cells.jpg/800px-Micrograph_of_intraductal_carcinoma_of_the_prostate_with_very_patchy_basal_cells.jpg" class="container__img" alt="Image 6">
+      <span class="title">File:Micrograph_of_intraductal_carcinoma_of_the_prostate_with_very_patchy_basal_cells.jpg</span>
+    </div>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Basal_Cell_Carcinoma.jpg/800px-Basal_Cell_Carcinoma.jpg" class="container__img" alt="Image 6">
+      <span class="title">File:Basal_Cell_Carcinoma.jpg</span>
+    </div>
+  </section>
+  <div class="footer">
+    <button onclick="addImage()">More cancer</button>
+  </div>
 </body>
 </html>
