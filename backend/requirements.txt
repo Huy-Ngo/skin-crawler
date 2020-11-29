@@ -4,6 +4,7 @@ chardet==3.0.4
 click==7.1.2
 flake8==3.8.4
 Flask==1.1.2
+Flask-Cors==3.0.9
 idna==2.10
 importlib-metadata==2.0.0
 itsdangerous==1.1.0

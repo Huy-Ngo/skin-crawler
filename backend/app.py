@@ -2,6 +2,7 @@ from json import load
 from random import shuffle
 
 from flask import Flask
+from flask_cors import CORS
 
 with open('data.json', 'r') as f:
     data = load(f)
@@ -13,6 +14,7 @@ with open('data.json', 'r') as f:
     shuffle(data)
 
 app = Flask(__name__)
+CORS(app)
 
 
 def get_page(data, page):
