@@ -32,8 +32,11 @@ def add_host(data, host):
 if __name__ == '__main__':
     host = 'localhost:5000'
     full_kaggle = get_kaggle_full()
-    full_isic = ISIC_getdata(300, 300)
-    full_wiki = wikimedia_crawl(500)
+    full_isic = ISIC_getdata(100, 100)
+    wiki_1 = wikimedia_crawl('Basal-cell carcinoma', 250)
+    wiki_2 = wikimedia_crawl('Squamous-cell skin carcinoma', 250)
+    wiki_3 = wikimedia_crawl('Malignant melanoma', 250)
+    full_wiki = wiki_1 + wiki_2 + wiki_3
     full_yandex = yandex_crawler(20)
     print('Crawled:')
     print(len(full_kaggle), 'image(s) from Kaggle')
