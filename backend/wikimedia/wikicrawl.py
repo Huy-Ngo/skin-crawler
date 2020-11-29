@@ -2,8 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def make_query_key(search_key):
-    """Make search key on Wikimedia."""
+def make_query(search_key):
+    """Make search query from search key on Wikimedia."""
     return search_key.replace(' ', '+')
 
 
@@ -20,20 +20,21 @@ def wikimedia_crawl(cancer_type, result=100):
             - original: URL to the web page where the image is found
             - title: the title of the image
     """
-    url = f"https://commons.wikimedia.org/w/index.php?title=Special:Search&limit=\
-    {result}&offset=0&profile=default&search={make_query_key(cancer_type)}\
-    &advancedSearch-current={{}}&ns0=1&ns6=1&ns12=1&ns14=1&ns100=1&ns106=1"
+    url = 'https://commons.wikimedia.org/w/'
+    url += f'index.php?title=Special:Search&limit={result}&offset=0'
+    url += '&ns0=1&ns6=1&ns12=1&ns14=1&ns100=1&ns106=1'
+    url += f'&search={make_query(cancer_type)}'
+    url += '+filetype%3Abitmap'
+    url += '&advancedSearch-current={"fields":{"filetype":"bitmap"}}'
 
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
 
     infos = soup.find_all("a", "image")
+    print(len(infos))
     data_list = []
     for info in infos:
         title = info["href"].replace("/wiki/", "")
-        if title.endswith('pdf'):
-            # Skip pdf files
-            continue
         title = title.replace('_', ' ')
         origin_url = "https://commons.wikimedia.org" + info["href"]
         data = {}
