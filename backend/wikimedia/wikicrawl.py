@@ -2,7 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def wikimedia_crawl(result=100):
+def make_query_key(search_key):
+    """Make search key on Wikimedia."""
+    return search_key.replace(' ', '+')
+
+
+def wikimedia_crawl(cancer_type, result=100):
     """Get images from wikimedia when search for skin cancer.
     Parameters:
         result : int.
@@ -16,7 +21,7 @@ def wikimedia_crawl(result=100):
             - title: the title of the image
     """
     url = f"https://commons.wikimedia.org/w/index.php?title=Special:Search&limit=\
-    {result}&offset=0&profile=default&search=Basal-cell+carcinoma\
+    {result}&offset=0&profile=default&search={make_query_key(cancer_type)}\
     &advancedSearch-current={{}}&ns0=1&ns6=1&ns12=1&ns14=1&ns100=1&ns106=1"
 
     response = requests.get(url)
@@ -42,4 +47,4 @@ def wikimedia_crawl(result=100):
 
 
 if __name__ == '__main__':
-    wikimedia_crawl(100)
+    wikimedia_crawl('Basal-cell carcinoma', 100)
