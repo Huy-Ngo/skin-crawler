@@ -31,6 +31,9 @@ def wikimedia_crawl(cancer_type, result=100):
     data_list = []
     for info in infos:
         title = info["href"].replace("/wiki/", "")
+        if title.endswith('pdf'):
+            # Skip pdf files
+            continue
         origin_url = "https://commons.wikimedia.org" + info["href"]
         data = {}
         # request to origin url to get full image
