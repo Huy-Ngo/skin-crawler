@@ -9,79 +9,49 @@ with open('data.json', 'r') as f:
     isic_data = data['isic']
     wiki_data = data['wiki']
     yandex_data = data['yandex']
+    data = kaggle_data + isic_data + wiki_data + yandex_data
+    shuffle(data)
 
 app = Flask(__name__)
 
 
-def randomize(data, n_images):
-    """Get randomly `n_images` from data.
-
-    Return the unchanged data
-    if the data size is smaller or equal to `n_images`.
-    """
-    if len(data) > n_images:
-        shuffle(data)
-        data = data[:n_images]
-    return data
-
-
-@app.route('/kaggle/<int:n_images>')
-def get_kaggle(n_images):
-    """Get `n_images` images from Kaggle API."""
-    return {'data': randomize(kaggle_data, n_images)}
+def get_page(data, page):
+    """Get nth page of a data, with each page having 20 entries."""
+    begin = page * 20
+    end = page * 20 + 20
+    if begin >= len(data):
+        return []
+    elif end >= len(data):
+        return data[begin:]
+    else:
+        return data[begin:end]
 
 
-@app.route('/isic/<int:n_images>')
-def get_isic(n_images):
-    """Get `n_images` images from ISIC API."""
-    return {'data': randomize(isic_data, n_images)}
+@app.route('/kaggle/<int:page>')
+def get_kaggle(page):
+    """Get a page of 20 images from Kaggle API."""
+    return {'data': get_page(kaggle_data, page)}
 
 
-@app.route('/wiki/<int:n_images>')
-def get_wiki(n_images):
-    """Get `n_images` images from WikiMedia."""
-    return {'data': randomize(wiki_data, n_images)}
+@app.route('/isic/<int:page>')
+def get_isic(page):
+    """Get a page of 20 images from ISIC API."""
+    return {'data': get_page(isic_data, page)}
 
 
-@app.route('/yandex/<int:n_images>')
-def get_yandex(n_images):
-    """Get `n_images` images from WikiMedia."""
-    return {'data': randomize(yandex_data, n_images)}
+@app.route('/wiki/<int:page>')
+def get_wiki(page):
+    """Get a page of 20 images from WikiMedia."""
+    return {'data': get_page(wiki_data, page)}
 
 
-@app.route('/all/<int:n_images>')
-def get_all(n_images):
-    """Get `n_images` images from all sources."""
-    data = kaggle_data + isic_data + wiki_data + yandex_data
-    return {'data': randomize(data, n_images)}
+@app.route('/yandex/<int:page>')
+def get_yandex(page):
+    """Get a page of 20 images from WikiMedia."""
+    return {'data': get_page(yandex_data, page)}
 
 
-@app.route('/kaggle')
-def get_kaggle_full():
-    """Get `n_images` images from Kaggle API."""
-    return {'data': kaggle_data}
-
-
-@app.route('/isic')
-def get_isic_full():
-    """Get `n_images` images from ISIC API."""
-    return {'data': isic_data}
-
-
-@app.route('/wiki')
-def get_wiki_full():
-    """Get `n_images` images from WikiMedia."""
-    return {'data': wiki_data}
-
-
-@app.route('/yandex')
-def get_yandex_full():
-    """Get `n_images` images from WikiMedia."""
-    return {'data': yandex_data}
-
-
-@app.route('/all')
-def get_all_full():
-    """Get `n_images` images from all sources."""
-    data = kaggle_data + isic_data + wiki_data + yandex_data
-    return {'data': data}
+@app.route('/all/<int:page>')
+def get_all(page):
+    """Get a page of 20 images from all sources."""
+    return {'data': get_page(data, page)}
