@@ -31,7 +31,6 @@ def wikimedia_crawl(cancer_type, result=100):
     soup = BeautifulSoup(response.content, "html.parser")
 
     infos = soup.find_all("a", "image")
-    print(len(infos))
     data_list = []
     for info in infos:
         title = info["href"].replace("/wiki/", "")
