@@ -1,8 +1,29 @@
 const imageContainer = document.querySelector("section.container#inf-img");
 
 /*
-	* Create an image element in the HTML with the information provided
+	* Paginated 
 	* */
+var page = 1;
+
+function moreCancer(){
+	var req = 'http://127.0.0.1:5000/all/' + page.toString();
+		fetch(req, {mode: "cors"})
+			.then(response => response.json())
+			.then(data => {
+				console.log(data)
+				for (const image of data.data) {
+					displayImage(image);
+				}
+			});
+		page++;
+	}
+
+
+
+
+/*
+	* Create an image element in the HTML with the information provided
+	* */	
 function displayImage(image) {
 	const div = document.createElement("div");
 	const span = document.createElement("span");
