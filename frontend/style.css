@@ -137,6 +137,7 @@ div#modal {
 	background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
 	color: white;
 	font-family: Arial;
+	font-size: 2em;
 }
 
 div#modal > span {
