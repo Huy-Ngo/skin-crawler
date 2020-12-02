@@ -28,7 +28,12 @@ function displayModal(image) {
 	caption.innerText = image.title;
 	source = modal.querySelector("#source");
 	source.innerText = image.host;
-	source.href = image.original;
+	if (image.original === null) {
+		source.href = "#";
+		source.title = "Source not available";
+	} else {
+		source.href = image.original;
+	}
 	close = modal.querySelector("#close-modal")
 	close.onclick = function() {
 		modal.style.display = "none";

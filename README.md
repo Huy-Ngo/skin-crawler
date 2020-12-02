@@ -21,3 +21,7 @@ export FLASK_APP=app.py
 export FLASK_ENV=development
 flask run
 ```
+
+### Frontend
+
+Open file `frontend/index.html`
