@@ -121,3 +121,14 @@ img{
 button:hover {
 	background-color:#5cbf2a;
 }
+
+div#modal {
+	display: none;
+	background: white;
+	height: 500px;
+	width: 500px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}

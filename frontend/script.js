@@ -1,4 +1,5 @@
 const imageContainer = document.querySelector("section.container#inf-img");
+const modal = document.querySelector("div#modal");
 
 /*
 	* Paginated 
@@ -18,7 +19,13 @@ function moreCancer(){
 		page++;
 	}
 
-
+function displayModal(image) {
+	modal.style.display = "block";
+	img = modal.querySelector("img");
+	img.src = image.image;
+	img.alt = image.title;
+	console.log(modal)
+}
 
 
 /*
@@ -38,6 +45,10 @@ function displayImage(image) {
 
 	div.appendChild(img);
 	div.appendChild(span);
+
+	div.addEventListener("click", function() {
+		displayModal(image);
+	})
 
 	imageContainer.appendChild(div);
 	console.log('success')
