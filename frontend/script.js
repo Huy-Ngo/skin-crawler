@@ -24,6 +24,17 @@ function displayModal(image) {
 	img = modal.querySelector("img");
 	img.src = image.image;
 	img.alt = image.title;
+	caption = modal.querySelector("#caption");
+	caption.innerText = image.title;
+	source = modal.querySelector("#source");
+	source.innerText = image.host;
+	source.href = image.original;
+	close = modal.querySelector("#close-modal")
+	close.onclick = function() {
+		modal.style.display = "none";
+	}
+	console.log(modal)
+	console.log(modal)
 	console.log(modal)
 }
 

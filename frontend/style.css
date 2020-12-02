@@ -88,11 +88,11 @@ img{
 }
 
 .container > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2em;
-  color: #c5e3f6;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ font-size: 2em;
+ color: #c5e3f6;
 }
 
 .footer{
@@ -104,31 +104,52 @@ img{
 .footer > button{
 	margin-top: 30px;
 	width: 200px;
-  	background-color:#44c767;
-	border-radius:28px;
-	border:1px solid #18ab29;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	padding:16px 31px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
+ 	background-color: #44c767;
+	border-radius: 28px;
+	border: 1px solid #18ab29;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 17px;
+	padding: 16px 31px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #2f6627;
 	text-align: center;
 }
 
 button:hover {
-	background-color:#5cbf2a;
+	background-color: #5cbf2a;
 }
 
 div#modal {
 	display: none;
-	background: white;
-	height: 500px;
-	width: 500px;
+	height: 100%;
+	width: 100%;
 	position: fixed;
 	top: 0;
 	left: 0;
+	overflow: auto;
+	padding-top: 100px;
 	z-index: 1;
+	text-align: center;
+	background-color: rgba(0,0,0);
+	background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+	color: white;
+	font-family: Arial;
+}
+
+div#modal > span {
+	cursor: pointer;
+	position: absolute;
+	top: 15px;
+	right: 35px;
+	color: #f1f1f1;
+	font-size: 40px;
+	font-weight: bold;
+	transition: 0.3s;
+}
+
+div#modal > a {
+	color: yellow;
 }
